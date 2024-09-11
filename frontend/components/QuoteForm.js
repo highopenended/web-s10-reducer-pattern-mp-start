@@ -1,17 +1,14 @@
-import React, {useReducer} from 'react' // 👈 you'll need the reducer hook
+import React, {useReducer} from 'react' 
 
-// 👇 these are the types of actions that can change state
 const CHANGE_INPUT = 'CHANGE_INPUT'
 const RESET_FORM = 'RESET_FORM'
 
-// 👇 create your initial state object here
 const initialState={
   authorName:"",
   quoteText:""
 }
 
 const reducer = (state, action) => {
-  // 👇 implement your reducer here using the action types above
   switch(action.type){
     case CHANGE_INPUT:
       {action.payload.name} 
@@ -22,9 +19,6 @@ const reducer = (state, action) => {
       return { ...initialState }
   }
 }
-
-
-// 👇 create your reducer function here
 
 export default function TodoForm({ createQuote = () => { } }) {
   const [state, dispatch]=useReducer(reducer, initialState)
@@ -41,7 +35,6 @@ export default function TodoForm({ createQuote = () => { } }) {
     resetForm()
   }
 
-  // 👇 some props are missing in the JSX below:
   return (
     <form id="quoteForm" onSubmit={onNewQuote}>
       <h3>New Quote Form</h3>

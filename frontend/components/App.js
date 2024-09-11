@@ -64,8 +64,6 @@ export default function App() {
   const [state, dispatch]=useReducer(reducer, initialState)
 
   const createQuote = ({ authorName, quoteText }) => {
-    // 👇 use the helper function above to create a new quote
-    // 👇 and dispatch it over to the reducer
     let newQuote={
       id: getNextId(),
       quoteText: quoteText,
@@ -84,7 +82,6 @@ export default function App() {
       <h2>Module Project</h2>
       <Quotes    
         quotes={state.quotes}
-        // 👇 lots of props are missing! Check the Quotes component
         highlightedQuote={state.highlightedQuote}
         displayAllQuotes={state.displayAllQuotes}
         deleteQuote={(id)=>deleteQuote(id)}
