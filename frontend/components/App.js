@@ -45,7 +45,10 @@ const reducer = (state, action) => {
   // 👇 implement your reducer here using the action types above
   switch(action.type){
     case CREATE_QUOTE:
-      return {...state}  
+      return {
+        ...state,
+        quotes : [...state.quotes, action.payload]
+      }  
     case DELETE_QUOTE:
       return { ...state, quotes : state.quotes.filter(quote => quote.id !== action.payload)}
     case EDIT_QUOTE_AUTHENTICITY:
@@ -63,6 +66,13 @@ export default function App() {
   const createQuote = ({ authorName, quoteText }) => {
     // 👇 use the helper function above to create a new quote
     // 👇 and dispatch it over to the reducer
+    let newQuote={
+      id: getNextId(),
+      quoteText: quoteText,
+      authorName: authorName,
+      apocryphal: false,
+    }
+    dispatch({type:CREATE_QUOTE, payload : newQuote})
   }
   const deleteQuote = id => { dispatch({type:DELETE_QUOTE, payload:id}) }
   const editQuoteAuthenticity = id => {dispatch({type:EDIT_QUOTE_AUTHENTICITY, payload:id})}
