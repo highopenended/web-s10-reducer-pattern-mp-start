@@ -1,4 +1,4 @@
-import React from 'react' // 👈 you'll need the reducer hook
+import React, {useReducer} from 'react' // 👈 you'll need the reducer hook
 import Quotes from './Quotes'
 import QuoteForm from './QuoteForm'
 
@@ -33,13 +33,35 @@ const quotes = [
 ]
 
 // 👇 create your initial state object here
+const initialState={
+  displayAllQuotes:true,
+  highlightedQuote:null,
+  quotes:quotes
+}
+
+
 
 const reducer = (state, action) => {
   // 👇 implement your reducer here using the action types above
+  switch(action.type){
+    case CREATE_QUOTE:
+      return {...state}  
+    case DELETE_QUOTE:
+      return {...state}
+    case EDIT_QUOTE_AUTHENTICITY:
+      return {...state}
+    case SET_HIGHLIGHTED_QUOTE:
+      return {...state}
+    case TOGGLE_VISIBILITY:
+      return {...state}
+  }
+
 }
 
 export default function App() {
   // 👇 use the reducer hook to spin up state and dispatch
+  const [state, dispatch]=useReducer(reducer, initialState)
+
 
   const createQuote = ({ authorName, quoteText }) => {
     // 👇 use the helper function above to create a new quote
@@ -61,10 +83,15 @@ export default function App() {
   return (
     <div id="mp">
       <h2>Module Project</h2>
-      <Quotes
-        quotes={quotes}
-      // 👇 lots of props are missing! Check the Quotes component
-
+      <Quotes    
+        quotes={state.quotes}
+        // 👇 lots of props are missing! Check the Quotes component
+        highlightedQuote={state.highlightedQuote}
+        displayAllQuotes={state.displayAllQuotes}
+        deleteQuote={(id)=>deleteQuote(id)}
+        editQuoteAuthenticity={(id)=>editQuoteAuthenticity(id)}
+        setHighlightedQuote={(id)=>setHighlightedQuote(id)}
+        toggleVisibility={()=>toggleVisibility()}
       />
       <QuoteForm
         createQuote={createQuote}
